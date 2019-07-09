@@ -1,13 +1,17 @@
 # @Author: atlekbai
 # @Date:   2019-07-09 11:32:11
 # @Last Modified by:   Tlekbai Ali
-# @Last Modified time: 2019-07-09 18:29:55
+# @Last Modified time: 2019-07-09 18:42:34
 
 if [ -z "$DBUSER" ] && [ -z "$DBPASSWORD" ]
 then
 	echo "set variables \$DBUSER and \$DBPASSWORD"
 	exit 1
 fi
+
+wget https://github.com/alem-01/server/archive/master.zip
+unzip master.zip
+cd server-master
 
 set -x
 
@@ -32,7 +36,7 @@ function setup-october() {
 
 	# setup theme
 	rm -rf /var/www/html/$1/themes/demo
-	unzip themes/$.zip -d /var/www/html/$1/themes/demo
+	unzip ~/server-master/themes/$.zip -d /var/www/html/$1/themes/demo
 }
 
 function setup-php() {
