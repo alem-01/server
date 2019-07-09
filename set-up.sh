@@ -1,17 +1,13 @@
 # @Author: atlekbai
 # @Date:   2019-07-09 11:32:11
 # @Last Modified by:   Tlekbai Ali
-# @Last Modified time: 2019-07-09 18:42:34
+# @Last Modified time: 2019-07-09 19:47:52
 
 if [ -z "$DBUSER" ] && [ -z "$DBPASSWORD" ]
 then
 	echo "set variables \$DBUSER and \$DBPASSWORD"
 	exit 1
 fi
-
-wget https://github.com/alem-01/server/archive/master.zip
-unzip master.zip
-cd server-master
 
 set -x
 
@@ -30,13 +26,15 @@ function setup-october() {
 	sudo cp cms.php /var/www/html/$1/config
 	php /var/www/html/$1/artisan october:update
 	
-	# delete installation
+	# delete installation files
 	rm -rf /var/www/html/$1/install_files/
 	rm /var/www/html/$1/install.php
 
-	# setup theme
+	# setup october
 	rm -rf /var/www/html/$1/themes/demo
 	unzip ~/server-master/themes/$.zip -d /var/www/html/$1/themes/demo
+	sudo cp ~/server-master/cms.php /var/www/html/$1/config/cms.php
+	sudo cp ~/server-master/plugins /var/www/html/$1/plugins
 }
 
 function setup-php() {
@@ -57,7 +55,7 @@ function setup-php() {
 						php7.1-zip \
 						php7.1-curl
 
-	sudo mv php.ini /etc/php/7.1/fpm/php.ini
+	sudo mv ~/server-master/php.ini /etc/php/7.1/fpm/php.ini
 }
 
 function setup-docker() {
@@ -99,10 +97,7 @@ cd /tmp
 wget http://octobercms.com/download -O octobercms.zip
 sudo unzip octobercms.zip
 
-# alem.school
 setup-october alem.school
-
-# umit.fund
 setup-october umit.fund
 
 rm -rf install-master

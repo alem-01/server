@@ -1,0 +1,11 @@
+- nginx
+- php7
+	- october
+		- alem.school
+			- plugins
+			- themes
+		- umit.fund
+			- plugins
+			- themes
+- postgresql
+± docker
