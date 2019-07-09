@@ -1,0 +1,6 @@
+plugin:
+    name: 'atlekbai.contact::lang.plugin.name'
+    description: 'atlekbai.contact::lang.plugin.description'
+    author: atlekbai
+    icon: oc-icon-forumbee
+    homepage: ''
