@@ -1,7 +1,7 @@
 # @Author: atlekbai
 # @Date:   2019-07-09 11:32:11
 # @Last Modified by:   Tlekbai Ali
-# @Last Modified time: 2019-07-09 19:47:52
+# @Last Modified time: 2019-07-09 19:57:34
 
 if [ -z "$DBUSER" ] && [ -z "$DBPASSWORD" ]
 then
@@ -23,7 +23,6 @@ function setup-october() {
 	sudo -u postgres psql -c "CREATE DATABASE $1;"
 	curl -H "Host: $1" -s localhost/api/installer | php
 	php /var/www/html/$1/artisan october:install
-	sudo cp cms.php /var/www/html/$1/config
 	php /var/www/html/$1/artisan october:update
 	
 	# delete installation files
